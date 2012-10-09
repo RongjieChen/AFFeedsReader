@@ -98,8 +98,11 @@
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-	NSString *source = [NSString stringWithFormat:[[self.parseResults objectAtIndex:indexPath.row] objectForKey:@"summary"]];
+    
+    NSString *source;
+    if (self.parseResults) {
+        source = [NSString stringWithFormat:@"%@",[[self.parseResults objectAtIndex:indexPath.row] objectForKey:@"summary"]];
+    }
 
     DocumentRoot *document = [Element parseHTML: source];
 	Element *elements = [document selectElement: @"img"];
